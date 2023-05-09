@@ -25,10 +25,67 @@
 
 <p><a href="https://ensino.hashi.pro.br/desprog/" target="_blank">Desafios de Programação</a></p>
 <h1>Algoritmo de Knuth-Morris-Pratt (KMP)</h1>
-<h2>1.Introdução</h2>
-<p>O algoritmo de Knuth-Morris-Pratt (KMP) é uma das soluções mais eficientes para o problema de correspondência de padrões em uma string. Esse problema é muito importante em diversas áreas, como processamento de linguagem natural, análise de dados e bioinformática.</p>
-<p>Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt, o algoritmo KMP tem sido amplamente utilizado em diversas aplicações, desde então.</p>
-<p>Este handout tem como objetivo apresentar o funcionamento detalhado do algoritmo KMP, como ele pode ser implementado e otimizado, e como ele se compara com outros algoritmos de correspondência de padrões. Além disso, também exploraremos alguns exemplos práticos do uso do algoritmo.</p>
+<h2>6. Comparação com outros algoritmos</h2>
+<p>Existem diversos algoritmos para solucionar o problema de correspondência de padrões, cada um com suas próprias características e complexidades.</p>
+<p>O algoritmo de força bruta é a solução mais simples para o problema de correspondência de padrões. Ele consiste em percorrer a string de texto e comparar o padrão com cada uma das substrings. Esse método tem complexidade de tempo O(nm), onde n é o tamanho da string e m é o tamanho do padrão. Apesar de sua simplicidade, esse algoritmo não é eficiente para strings grandes ou padrões longos, já que ele realiza muitas comparações desnecessárias.</p>
+<pre><code class="language-c">// pseudocódigo em C do algoritmo de força bruta
+int bruteForce(char* texto, char* padrao) {
+    int n = strlen(texto); // Tamanho da string de texto
+    int m = strlen(padrao); // Tamanho da string de padrão
+    int i, j; // Índices para percorrer as strings
+
+    for (i = 0; i &lt;= n - m; i++) { // Percorre a string de texto
+        for (j = 0; j &lt; m; j++) { // Percorre a string de padrão
+            if (texto[i+j] != padrao[j]) // Se encontrar uma diferença, sai do loop interno
+                break;
+        }
+        if (j == m) // Se o índice j chegou ao final do padrão, significa que encontrou uma ocorrência
+            return i;
+    }
+
+    return -1; // Se não encontrou ocorrência, retorna -1
+}
+</code></pre>
+<p>O algoritmo de Boyer-Moore, assim como o KMP, utiliza informações sobre a string e o padrão para evitar comparações desnecessárias. Ele é considerado um dos algoritmos mais rápidos para o problema de correspondência de padrões na prática, com uma complexidade de tempo média O(n/m). O algoritmo utiliza duas heurísticas: o salto ruim (bad character rule) e o salto bom (good suffix rule), para determinar o deslocamento necessário na string de texto.</p>
+<pre><code class="language-c">// TODO: pseudocódigo em C do algoritmo de Boyer-Moore
+</code></pre>
+<p>No entanto, é importante lembrar que a eficiência dos algoritmos depende das características específicas da string e do padrão em questão. Por isso, é importante avaliar o desempenho de cada algoritmo para cada caso específico.</p>
+<p>Ainda não foram realizados testes para comparar o desempenho do algoritmo KMP com os algoritmos de força bruta e Boyer-Moore. Na próxima sprint, vamos apresentar os resultados desses testes e comparar o desempenho dos algoritmos para diferentes tamanhos de string e padrão.</p>
+<h2>TABELA MERAMENTE ILUSTRATIVA</h2>
+<figure class="table"><table>
+<thead>
+<tr>
+<th>Tamanho da string</th>
+<th>Tamanho do padrão</th>
+<th>Força Bruta</th>
+<th>KMP</th>
+<th>Boyer-Moore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10^4</td>
+<td>10</td>
+<td>0.003s</td>
+<td>0.001s</td>
+<td>0.002s</td>
+</tr>
+<tr>
+<td>10^5</td>
+<td>100</td>
+<td>0.308s</td>
+<td>0.011s</td>
+<td>0.001s</td>
+</tr>
+<tr>
+<td>10^6</td>
+<td>1000</td>
+<td>32.5s</td>
+<td>0.125s</td>
+<td>0.008s</td>
+</tr>
+</tbody>
+</table></figure>
 
 
             </main>
