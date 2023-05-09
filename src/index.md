@@ -3,7 +3,91 @@
 Algoritmo de Knuth-Morris-Pratt (KMP) 
 ======
 
-## 6. Comparação com outros algoritmos
+1.Introdução
+-------
+
+O algoritmo de Knuth-Morris-Pratt (KMP) é uma das soluções mais eficientes para o problema de correspondência de padrões em uma string. Esse problema é muito importante em diversas áreas, como processamento de linguagem natural, análise de dados e bioinformática.
+
+Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt, o algoritmo KMP tem sido amplamente utilizado em diversas aplicações, desde então.
+
+Este handout tem como objetivo apresentar o funcionamento detalhado do algoritmo KMP, como ele pode ser implementado e otimizado, e como ele se compara com outros algoritmos de correspondência de padrões. Além disso, também exploraremos alguns exemplos práticos do uso do algoritmo.
+
+4.Implementação em C
+
+O KMP usa uma tabela de falhas (também conhecida como tabela de borda) para armazenar informações sobre o padrão que são usadas para evitar comparações repetidas. A tabela de falhas é construída antes de iniciar a correspondência de padrões e é baseada no padrão a ser encontrado.
+
+!!!
+A ser melhorado
+!!!
+
+???
+Como seria uma implementação do algoritmo KMP em C?
+
+:::
+Aqui está um exemplo de implementação do algoritmo KMP em C:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void preencher_tabela(int tabela[], char padrao[])
+{
+    int tam_padrao = strlen(padrao);
+    int i = 0, j = -1;
+    tabela[0] = -1;
+
+    while (i < tam_padrao)
+    {
+        while (j >= 0 && padrao[i] != padrao[j])
+        {
+            j = tabela[j];
+        }
+
+        i++;
+        j++;
+        tabela[i] = j;
+    }
+}
+
+void encontrar_padrao(char texto[], char padrao[])
+{
+    int tam_texto = strlen(texto);
+    int tam_padrao = strlen(padrao);
+    int tabela[tam_padrao];
+    preencher_tabela(tabela, padrao);
+    int i = 0, j = 0;
+
+    while (i < tam_texto)
+    {
+        while (j >= 0 && texto[i] != padrao[j])
+        {
+            j = tabela[j];
+        }
+
+        i++;
+        j++;
+
+        if (j == tam_padrao)
+        {
+            printf("Padrao encontrado na posicao %d\n", i - j);
+            j = tabela[j];
+        }
+    }
+}
+
+int main()
+{
+    char texto[] = "ababcabcabababcabcabc";
+    char padrao[] = "abcabc";
+    encontrar_padrao(texto, padrao);
+    return 0;
+}
+```
+:::
+???
+
+6.Comparação com outros algoritmos
+-------
 
 Existem diversos algoritmos para solucionar o problema de correspondência de padrões, cada um com suas próprias características e complexidades.
 
