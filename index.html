@@ -25,7 +25,81 @@
 
 <p><a href="https://ensino.hashi.pro.br/desprog/" target="_blank">Desafios de Programação</a></p>
 <h1>Algoritmo de Knuth-Morris-Pratt (KMP)</h1>
-<h2>6. Comparação com outros algoritmos</h2>
+<h2>1.Introdução</h2>
+<p>O algoritmo de Knuth-Morris-Pratt (KMP) é uma das soluções mais eficientes para o problema de correspondência de padrões em uma string. Esse problema é muito importante em diversas áreas, como processamento de linguagem natural, análise de dados e bioinformática.</p>
+<p>Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt, o algoritmo KMP tem sido amplamente utilizado em diversas aplicações, desde então.</p>
+<p>Este handout tem como objetivo apresentar o funcionamento detalhado do algoritmo KMP, como ele pode ser implementado e otimizado, e como ele se compara com outros algoritmos de correspondência de padrões. Além disso, também exploraremos alguns exemplos práticos do uso do algoritmo.</p>
+<p>4.Implementação em C</p>
+<p>O KMP usa uma tabela de falhas (também conhecida como tabela de borda) para armazenar informações sobre o padrão que são usadas para evitar comparações repetidas. A tabela de falhas é construída antes de iniciar a correspondência de padrões e é baseada no padrão a ser encontrado.</p>
+<blockquote class="warning">
+<p>Aviso</p>
+<p>A ser melhorado</p>
+</blockquote>
+<blockquote class="question">
+<p>Pergunta</p>
+<p>Como seria uma implementação do algoritmo KMP em C?</p>
+<details class="answer">
+<summary>Resposta</summary>
+<p>Aqui está um exemplo de implementação do algoritmo KMP em C:</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void preencher_tabela(int tabela[], char padrao[])
+{
+    int tam_padrao = strlen(padrao);
+    int i = 0, j = -1;
+    tabela[0] = -1;
+
+    while (i &lt; tam_padrao)
+    {
+        while (j &gt;= 0 &amp;&amp; padrao[i] != padrao[j])
+        {
+            j = tabela[j];
+        }
+
+        i++;
+        j++;
+        tabela[i] = j;
+    }
+}
+
+void encontrar_padrao(char texto[], char padrao[])
+{
+    int tam_texto = strlen(texto);
+    int tam_padrao = strlen(padrao);
+    int tabela[tam_padrao];
+    preencher_tabela(tabela, padrao);
+    int i = 0, j = 0;
+
+    while (i &lt; tam_texto)
+    {
+        while (j &gt;= 0 &amp;&amp; texto[i] != padrao[j])
+        {
+            j = tabela[j];
+        }
+
+        i++;
+        j++;
+
+        if (j == tam_padrao)
+        {
+            printf("Padrao encontrado na posicao %d\n", i - j);
+            j = tabela[j];
+        }
+    }
+}
+
+int main()
+{
+    char texto[] = "ababcabcabababcabcabc";
+    char padrao[] = "abcabc";
+    encontrar_padrao(texto, padrao);
+    return 0;
+}
+</code></pre>
+</details>
+</blockquote>
+<h2>6.Comparação com outros algoritmos</h2>
 <p>Existem diversos algoritmos para solucionar o problema de correspondência de padrões, cada um com suas próprias características e complexidades.</p>
 <p>O algoritmo de força bruta é a solução mais simples para o problema de correspondência de padrões. Ele consiste em percorrer a string de texto e comparar o padrão com cada uma das substrings. Esse método tem complexidade de tempo O(nm), onde n é o tamanho da string e m é o tamanho do padrão. Apesar de sua simplicidade, esse algoritmo não é eficiente para strings grandes ou padrões longos, já que ele realiza muitas comparações desnecessárias.</p>
 <pre><code class="language-c">// pseudocódigo em C do algoritmo de força bruta
