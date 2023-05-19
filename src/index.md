@@ -26,6 +26,27 @@ Sendo o KMP um poderoso algoritmo para solucionar o problema de correspondência
 Essa parte 2 ("E por que estudar o algoritmo KMP?") poderia ser um expositvo? Ou melhor em texto?
 !!!
 
+3.Como funciona o algoritmo KMP?
+-------
+
+Ele faz as correspondências do texto, porém quando encontra um caractere diferente, ele procura o índice na tabela desse caractere, e a partir dele sabe-se o quanto deve seguir para os próximos caracteres. 
+
+!!!
+IDEIAS: fazer slides que mostram melhor esse “pulo” de acordo com a tabela.
+!!!
+
+???
+Como acha a tabela do algoritmo?
+
+A tabela tão falada é de sufixos e prefixos, então com os caracteres que queremos, fazemos os sufixos e os prefixos deles e pegamos o maior tamanho entre os sufixos e prefixos iguais, sendo esse o índice e o indicativo de quanto a nossa palavra ou frase deve pular.
+:::Slides
+???
+
+!!!
+IDEIAS: fazer slides para mostrar como acha a tabela
+!!!
+
+
 4.Implementação em C
 -------
 
