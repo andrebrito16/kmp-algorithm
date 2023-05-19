@@ -38,6 +38,24 @@ Começando o algoritmo compara o primeiro caractere do padrão (frase ou palavra
 <p>Aviso</p>
 <p>Essa parte 2 (“E por que estudar o algoritmo KMP?”) poderia ser um expositvo? Ou melhor em texto?</p>
 </blockquote>
+<h2>3.Como funciona o algoritmo KMP?</h2>
+<p>Ele faz as correspondências do texto, porém quando encontra um caractere diferente, ele procura o índice na tabela desse caractere, e a partir dele sabe-se o quanto deve seguir para os próximos caracteres.</p>
+<blockquote class="warning">
+<p>Aviso</p>
+<p>IDEIAS: fazer slides que mostram melhor esse “pulo” de acordo com a tabela.</p>
+</blockquote>
+<blockquote class="question">
+<p>Pergunta</p>
+<p>Como acha a tabela do algoritmo?</p>
+<p>A tabela tão falada é de sufixos e prefixos, então com os caracteres que queremos, fazemos os sufixos e os prefixos deles e pegamos o maior tamanho entre os sufixos e prefixos iguais, sendo esse o índice e o indicativo de quanto a nossa palavra ou frase deve pular.</p>
+<details class="answer">
+<summary>Slides</summary>
+</details>
+</blockquote>
+<blockquote class="warning">
+<p>Aviso</p>
+<p>IDEIAS: fazer slides para mostrar como acha a tabela</p>
+</blockquote>
 <h2>4.Implementação em C</h2>
 <p>O KMP usa uma tabela de falhas (também conhecida como tabela de borda) para armazenar informações sobre o padrão que são usadas para evitar comparações repetidas. A tabela de falhas é construída antes de iniciar a correspondência de padrões e é baseada no padrão a ser encontrado.</p>
 <blockquote class="warning">
