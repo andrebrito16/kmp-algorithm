@@ -12,7 +12,22 @@ Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pr
 
 Este handout tem como objetivo apresentar o funcionamento detalhado do algoritmo KMP, como ele pode ser implementado e otimizado, e como ele se compara com outros algoritmos de correspondência de padrões. Além disso, também exploraremos alguns exemplos práticos do uso do algoritmo.
 
+2.E por que estudar o algoritmo KMP?
+-------
+
+Sabe quando você quer encontrar uma frase ou palavra, e para isso usa o famoso CTRL + F, ele costuma indicar as posições das ocorrências ou mostrar que ela não está presente no texto.
+
+O algoritmo torna esse processo mais rápido, evitando repetições de comparações desnecessárias, a gente vai aprender um pouco mais na frente, mas ele usa uma tabela para auxiliar o processo. 
+Começando o algoritmo compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto, caso os demais caracteres tenham correspondência, ele compara caractere por caractere, até encontrar uma diferença. Encontrada a diferença, o algoritmo vai usar a tabela para saber o quanto deve “pular” para o próximo caractere. 
+
+Sendo o KMP um poderoso algoritmo para solucionar o problema de correspondência de padrões de forma rápida e eficiente.
+
+!!!
+Essa parte 2 ("E por que estudar o algoritmo KMP?") poderia ser um expositvo? Ou melhor em texto?
+!!!
+
 4.Implementação em C
+-------
 
 O KMP usa uma tabela de falhas (também conhecida como tabela de borda) para armazenar informações sobre o padrão que são usadas para evitar comparações repetidas. A tabela de falhas é construída antes de iniciar a correspondência de padrões e é baseada no padrão a ser encontrado.
 
