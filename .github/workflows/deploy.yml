@@ -23,3 +23,5 @@ jobs:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
           publish_branch: gh-pages
+          cname: kmp.andrefb.tech
+          
