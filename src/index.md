@@ -2,60 +2,141 @@
 
 Algoritmo de Knuth-Morris-Pratt (KMP) 
 ======
+++++++++++++++++++++++++++++++++++++++++++
+*Desafios de Programação*
 
-1.Introdução
+**Aula 22: Knuth-Morris-Pratt (KMP)**
+++++++++++++++++++++++++++++++++++++++++++ História KMP
+-É uma das soluções mais eficientes para o problema de correspondência de padrões em uma string.
+++++++++++++++++++++++++++++++++++++++++++ História KMP
+-É uma das soluções mais eficientes para o problema de correspondência de padrões em uma string.
+
+-Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt
+++++++++++++++++++++++++++++++++++++++++++ História KMP
+-É uma das soluções mais eficientes para o problema de correspondência de padrões em uma string.
+
+-Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt
+
+-Processamento de Linguagem Neural, Ánalise de Dados e Bioinformática
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+- O algoritmo KMP compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto.
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+- O algoritmo KMP compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto.
+- Se os demais caracteres tiverem correspondência, a comparação ocorre caractere por caractere até encontrar uma diferença.
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+- O algoritmo KMP compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto.
+- Se os demais caracteres tiverem correspondência, a comparação ocorre caractere por caractere até encontrar uma diferença.
+- Quando uma diferença é encontrada, o algoritmo utiliza a tabela para determinar o salto necessário para o próximo caractere.
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+![](Funcionamento/Funcionamento00.png)
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+![](Funcionamento/Funcionamento01.png)
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+![](Funcionamento/Funcionamento02.png)
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+![](Funcionamento/Funcionamento03.png)
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+![](Funcionamento/Funcionamento04.png)
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+![](Funcionamento/Funcionamento05.png)
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+![](Funcionamento/Funcionamento06.png)
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+![](Funcionamento/Funcionamento07.png)
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+![](Funcionamento/Funcionamento08.png)
+++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+![](Funcionamento/Funcionamento09.png)
+++++++++++++++++++++++++++++++++++++++++++ Vantagens do Algoritmo
+-Eficiência: Evita comparações desnecessárias, resultando em um processo de busca mais rápido.
+++++++++++++++++++++++++++++++++++++++++++ Vantagens do Algoritmo
+-Eficiência: Evita comparações desnecessárias, resultando em um processo de busca mais rápido.
+
+-Utilização da tabela: A tabela auxilia no cálculo dos saltos, otimizando a localização dos padrões.
+++++++++++++++++++++++++++++++++++++++++++ Vantagens do Algoritmo
+-Eficiência: Evita comparações desnecessárias, resultando em um processo de busca mais rápido.
+
+-Utilização da tabela: A tabela auxilia no cálculo dos saltos, otimizando a localização dos padrões.
+
+-Solução poderosa: O algoritmo KMP é amplamente reconhecido por sua capacidade de solucionar o problema de correspondência de padrões de forma rápida e eficiente.
+++++++++++++++++++++++++++++++++++++++++++ .
+**Handout**
+
+- Agora podem tanto fazer individualmente quanto em grupo…
+
+- …e discussões em grupo podem de fato fazer diferença…
+
+- …mas, em algum momento, é importante fazer individualmente.
+
+- Se há gabarito, veja só em último caso.
+
+- Se não há gabarito, haverá um depois.
+++++++++++++++++++++++++++++++++++++++++++ . 
+**Observações**
+
+- Aprendizado ativo é fazer, não ler.
+
+- Exceto em um ou outro caso excepcional, uma atividade é possível sem consulta além do material de aula dado até o momento.
+
+- Além disso, muitas vezes a resposta da atividade é necessária para a compreensão do restante.
+
+- Ou seja, “deixar para entender depois” não faz sentido. “Depois” depende de “entender”.
+++++++++++++++++++++++++++++++++++++++++++
+
+!!!
+Precisa: Diminuir a fonte dos slides, falar da tabela (bem por cima) no funcionamento (pode ser um dos tópicos),tornar as imagens mais detalhadas (passo a passo) e maiores
+!!!
+
+1.Construindo a tabela de prefixos e sufixos
 -------
 
-O algoritmo de Knuth-Morris-Pratt (KMP) é uma das soluções mais eficientes para o problema de correspondência de padrões em uma string. Esse problema é muito importante em diversas áreas, como processamento de linguagem natural, análise de dados e bioinformática.
+A tabela do algoritmo refere-se à tabela de sufixos e prefixos. Nesse contexto, a tabela é construída a partir dos caracteres desejados, gerando os sufixos e prefixos correspondentes. Em seguida, verifica-se o maior tamanho entre os sufixos e prefixos que são iguais. Esse tamanho é usado como um índice que indica quantos caracteres a palavra ou frase deve avançar.
 
-Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt, o algoritmo KMP tem sido amplamente utilizado em diversas aplicações, desde então.
+:tabela_prefixo
 
-Este handout tem como objetivo apresentar o funcionamento detalhado do algoritmo KMP, como ele pode ser implementado e otimizado, e como ele se compara com outros algoritmos de correspondência de padrões. Além disso, também exploraremos alguns exemplos práticos do uso do algoritmo.
+Agora que aprendemos, vamos fazer alguns exercícios para fixar o conteúdo.
+??? Exercício 1 
 
-2.E por que estudar o algoritmo KMP?
--------
+Construa a tabela de prefixos e sufixos para:
 
-Sabe quando você quer encontrar uma frase ou palavra, e para isso usa o famoso CTRL + F, ele costuma indicar as posições das ocorrências ou mostrar que ela não está presente no texto.
+![](Exercicios/Exercicio1.png)
 
-O algoritmo torna esse processo mais rápido, evitando repetições de comparações desnecessárias, a gente vai aprender um pouco mais na frente, mas ele usa uma tabela para auxiliar o processo. 
-Começando o algoritmo compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto, caso os demais caracteres tenham correspondência, ele compara caractere por caractere, até encontrar uma diferença. Encontrada a diferença, o algoritmo vai usar a tabela para saber o quanto deve “pular” para o próximo caractere. 
-
-Sendo o KMP um poderoso algoritmo para solucionar o problema de correspondência de padrões de forma rápida e eficiente.
-
-!!!
-Essa parte 2 ("E por que estudar o algoritmo KMP?") poderia ser um expositvo? Ou melhor em texto?
-!!!
-
-3.Como funciona o algoritmo KMP?
--------
-
-Ele faz as correspondências do texto, porém quando encontra um caractere diferente, ele procura o índice na tabela desse caractere, e a partir dele sabe-se o quanto deve seguir para os próximos caracteres. 
-
-!!!
-IDEIAS: fazer slides que mostram melhor esse “pulo” de acordo com a tabela.
-!!!
-
-???
-Como acha a tabela do algoritmo?
-
-
-:::Resposta
-
-A tabela tão falada é de sufixos e prefixos, então com os caracteres que queremos, fazemos os sufixos e os prefixos deles e pegamos o maior tamanho entre os sufixos e prefixos iguais, sendo esse o índice e o indicativo de quanto a nossa palavra ou frase deve pular.
-
-:tabela
+::: Gabarito
+![](Gabaritos/Gabarito1.png)
 :::
-=======
-A tabela tão falada é de sufixos e prefixos, então com os caracteres que queremos, fazemos os sufixos e os prefixos deles e pegamos o maior tamanho entre os sufixos e prefixos iguais, sendo esse o índice e o indicativo de quanto a nossa palavra ou frase deve pular.
-:::Slides
-
+::: Gabarito Detalhado
+:Gabarito_Detalhado_1
+:::
 ???
+??? Exercício 2 
 
+Construa a tabela de prefixos e sufixos para:
+
+![](Exercicios/Exercicio2.png)
+
+::: Gabarito
+![](Gabaritos/Gabarito2.png)
+:::
+::: Gabarito Detalhado
+:Gabarito_Detalhado_2
+:::
+???
+??? Exercício 3 
+
+Construa a tabela de prefixos e sufixos para:
+
+![](Exercicios/Exercicio3.png)
+
+::: Gabarito
+![](Gabaritos/Gabarito3.png)
+:::
+::: Gabarito Detalhado
+:Gabarito_Detalhado_3
+:::
+???
 !!!
-IDEIAS: fazer slides para mostrar como acha a tabela
+Escrever mais (explicação dos exercícios, etc) e falar da complexidade
 !!!
-
-
 4.Implementação em C
 -------
 
