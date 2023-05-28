@@ -25,42 +25,323 @@
 
 <p><a href="https://ensino.hashi.pro.br/desprog/" target="_blank">Desafios de Programação</a></p>
 <h1>Algoritmo de Knuth-Morris-Pratt (KMP)</h1>
-<h2>1.Introdução</h2>
-<p>O algoritmo de Knuth-Morris-Pratt (KMP) é uma das soluções mais eficientes para o problema de correspondência de padrões em uma string. Esse problema é muito importante em diversas áreas, como processamento de linguagem natural, análise de dados e bioinformática.</p>
-<p>Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt, o algoritmo KMP tem sido amplamente utilizado em diversas aplicações, desde então.</p>
-<p>Este handout tem como objetivo apresentar o funcionamento detalhado do algoritmo KMP, como ele pode ser implementado e otimizado, e como ele se compara com outros algoritmos de correspondência de padrões. Além disso, também exploraremos alguns exemplos práticos do uso do algoritmo.</p>
-<h2>2.E por que estudar o algoritmo KMP?</h2>
-<p>Sabe quando você quer encontrar uma frase ou palavra, e para isso usa o famoso CTRL + F, ele costuma indicar as posições das ocorrências ou mostrar que ela não está presente no texto.</p>
-<p>O algoritmo torna esse processo mais rápido, evitando repetições de comparações desnecessárias, a gente vai aprender um pouco mais na frente, mas ele usa uma tabela para auxiliar o processo.
-Começando o algoritmo compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto, caso os demais caracteres tenham correspondência, ele compara caractere por caractere, até encontrar uma diferença. Encontrada a diferença, o algoritmo vai usar a tabela para saber o quanto deve “pular” para o próximo caractere.</p>
-<p>Sendo o KMP um poderoso algoritmo para solucionar o problema de correspondência de padrões de forma rápida e eficiente.</p>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+
+</div>
+<div class="slide-main">
+<p><em>Desafios de Programação</em></p>
+<p><strong>Aula 22: Knuth-Morris-Pratt (KMP)</strong></p>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+História KMP
+</div>
+<div class="slide-main">
+<p>-É uma das soluções mais eficientes para o problema de correspondência de padrões em uma string.</p>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+História KMP
+</div>
+<div class="slide-main">
+<p>-É uma das soluções mais eficientes para o problema de correspondência de padrões em uma string.</p>
+<p>-Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt</p>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+História KMP
+</div>
+<div class="slide-main">
+<p>-É uma das soluções mais eficientes para o problema de correspondência de padrões em uma string.</p>
+<p>-Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt</p>
+<p>-Processamento de Linguagem Neural, Ánalise de Dados e Bioinformática</p>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<ul>
+<li>O algoritmo KMP compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto.</li>
+</ul>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<ul>
+<li>O algoritmo KMP compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto.</li>
+<li>Se os demais caracteres tiverem correspondência, a comparação ocorre caractere por caractere até encontrar uma diferença.</li>
+</ul>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<ul>
+<li>O algoritmo KMP compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto.</li>
+<li>Se os demais caracteres tiverem correspondência, a comparação ocorre caractere por caractere até encontrar uma diferença.</li>
+<li>Quando uma diferença é encontrada, o algoritmo utiliza a tabela para determinar o salto necessário para o próximo caractere.</li>
+</ul>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<figure class="img"><img src="img/Funcionamento/Funcionamento00.png" alt=""></figure>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<figure class="img"><img src="img/Funcionamento/Funcionamento01.png" alt=""></figure>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<figure class="img"><img src="img/Funcionamento/Funcionamento02.png" alt=""></figure>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<figure class="img"><img src="img/Funcionamento/Funcionamento03.png" alt=""></figure>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<figure class="img"><img src="img/Funcionamento/Funcionamento04.png" alt=""></figure>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<figure class="img"><img src="img/Funcionamento/Funcionamento05.png" alt=""></figure>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<figure class="img"><img src="img/Funcionamento/Funcionamento06.png" alt=""></figure>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<figure class="img"><img src="img/Funcionamento/Funcionamento07.png" alt=""></figure>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<figure class="img"><img src="img/Funcionamento/Funcionamento08.png" alt=""></figure>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Funcionamento do Algoritmo
+</div>
+<div class="slide-main">
+<figure class="img"><img src="img/Funcionamento/Funcionamento09.png" alt=""></figure>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Vantagens do Algoritmo
+</div>
+<div class="slide-main">
+<p>-Eficiência: Evita comparações desnecessárias, resultando em um processo de busca mais rápido.</p>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Vantagens do Algoritmo
+</div>
+<div class="slide-main">
+<p>-Eficiência: Evita comparações desnecessárias, resultando em um processo de busca mais rápido.</p>
+<p>-Utilização da tabela: A tabela auxilia no cálculo dos saltos, otimizando a localização dos padrões.</p>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+Vantagens do Algoritmo
+</div>
+<div class="slide-main">
+<p>-Eficiência: Evita comparações desnecessárias, resultando em um processo de busca mais rápido.</p>
+<p>-Utilização da tabela: A tabela auxilia no cálculo dos saltos, otimizando a localização dos padrões.</p>
+<p>-Solução poderosa: O algoritmo KMP é amplamente reconhecido por sua capacidade de solucionar o problema de correspondência de padrões de forma rápida e eficiente.</p>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+.
+</div>
+<div class="slide-main">
+<p><strong>Handout</strong></p>
+<ul>
+<li>
+<p>Agora podem tanto fazer individualmente quanto em grupo…</p>
+</li>
+<li>
+<p>…e discussões em grupo podem de fato fazer diferença…</p>
+</li>
+<li>
+<p>…mas, em algum momento, é importante fazer individualmente.</p>
+</li>
+<li>
+<p>Se há gabarito, veja só em último caso.</p>
+</li>
+<li>
+<p>Se não há gabarito, haverá um depois.</p>
+</li>
+</ul>
+<div class="slide">
+<div class="slide-container">
+<div class="slide-header">
+.
+</div>
+<div class="slide-main">
+<p><strong>Observações</strong></p>
+<ul>
+<li>
+<p>Aprendizado ativo é fazer, não ler.</p>
+</li>
+<li>
+<p>Exceto em um ou outro caso excepcional, uma atividade é possível sem consulta além do material de aula dado até o momento.</p>
+</li>
+<li>
+<p>Além disso, muitas vezes a resposta da atividade é necessária para a compreensão do restante.</p>
+</li>
+<li>
+<p>Ou seja, “deixar para entender depois” não faz sentido. “Depois” depende de “entender”.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <blockquote class="warning">
 <p>Aviso</p>
-<p>Essa parte 2 (“E por que estudar o algoritmo KMP?”) poderia ser um expositvo? Ou melhor em texto?</p>
+<p>Precisa: Diminuir a fonte dos slides, falar da tabela (bem por cima) no funcionamento (pode ser um dos tópicos),tornar as imagens mais detalhadas (passo a passo) e maiores</p>
 </blockquote>
-<h2>3.Como funciona o algoritmo KMP?</h2>
-<p>Ele faz as correspondências do texto, porém quando encontra um caractere diferente, ele procura o índice na tabela desse caractere, e a partir dele sabe-se o quanto deve seguir para os próximos caracteres.</p>
-<blockquote class="warning">
-<p>Aviso</p>
-<p>IDEIAS: fazer slides que mostram melhor esse “pulo” de acordo com a tabela.</p>
+<h2>1.Construindo a tabela de prefixos e sufixos</h2>
+<p>A tabela do algoritmo refere-se à tabela de sufixos e prefixos. Nesse contexto, a tabela é construída a partir dos caracteres desejados, gerando os sufixos e prefixos correspondentes. Em seguida, verifica-se o maior tamanho entre os sufixos e prefixos que são iguais. Esse tamanho é usado como um índice que indica quantos caracteres a palavra ou frase deve avançar.</p>
+<div class="animation"><img class="frame" src="img/tabela_prefixo/prefixo0.png" alt="1"><img class="frame" src="img/tabela_prefixo/prefixo1.png" alt="2"><img class="frame" src="img/tabela_prefixo/prefixo2.png" alt="3"><img class="frame" src="img/tabela_prefixo/prefixo3.png" alt="4"><img class="frame" src="img/tabela_prefixo/prefixo4.png" alt="5"><img class="frame" src="img/tabela_prefixo/prefixo5.png" alt="6"><img class="frame" src="img/tabela_prefixo/prefixo6.png" alt="7"><img class="frame" src="img/tabela_prefixo/prefixo7.png" alt="8"></div>
+<p>Agora que aprendemos, vamos fazer alguns exercícios para fixar o conteúdo.</p>
+<blockquote class="question">
+<p>Exercício 1</p>
+<p>Construa a tabela de prefixos e sufixos para:</p>
+<figure class="img"><img src="img/Exercicios/Exercicio1.png" alt=""></figure>
+<details class="answer">
+<summary>Gabarito</summary>
+<figure class="img"><img src="img/Gabaritos/Gabarito1.png" alt=""></figure>
+</details>
+<details class="answer">
+<summary>Gabarito Detalhado</summary>
+<div class="animation"><img class="frame" src="img/Gabarito_Detalhado_1/GabaritoDetalhado10.png" alt="1"><img class="frame" src="img/Gabarito_Detalhado_1/GabaritoDetalhado11.png" alt="2"><img class="frame" src="img/Gabarito_Detalhado_1/GabaritoDetalhado12.png" alt="3"><img class="frame" src="img/Gabarito_Detalhado_1/GabaritoDetalhado13.png" alt="4"><img class="frame" src="img/Gabarito_Detalhado_1/GabaritoDetalhado14.png" alt="5"><img class="frame" src="img/Gabarito_Detalhado_1/GabaritoDetalhado15.png" alt="6"><img class="frame" src="img/Gabarito_Detalhado_1/GabaritoDetalhado16.png" alt="7"><img class="frame" src="img/Gabarito_Detalhado_1/GabaritoDetalhado17.png" alt="8"><img class="frame" src="img/Gabarito_Detalhado_1/GabaritoDetalhado18.png" alt="9"></div>
+</details>
 </blockquote>
 <blockquote class="question">
-<p>Pergunta</p>
-<p>Como acha a tabela do algoritmo?</p>
+<p>Exercício 2</p>
+<p>Construa a tabela de prefixos e sufixos para:</p>
+<figure class="img"><img src="img/Exercicios/Exercicio2.png" alt=""></figure>
 <details class="answer">
-<summary>Resposta</summary>
-<p>A tabela tão falada é de sufixos e prefixos, então com os caracteres que queremos, fazemos os sufixos e os prefixos deles e pegamos o maior tamanho entre os sufixos e prefixos iguais, sendo esse o índice e o indicativo de quanto a nossa palavra ou frase deve pular.</p>
-<div class="animation"><img class="frame" src="img/tabela/Tabela00.png" alt="1"><img class="frame" src="img/tabela/Tabela01.png" alt="2"><img class="frame" src="img/tabela/Tabela02.png" alt="3"><img class="frame" src="img/tabela/Tabela03.png" alt="4"><img class="frame" src="img/tabela/Tabela04.png" alt="5"><img class="frame" src="img/tabela/Tabela05.png" alt="6"><img class="frame" src="img/tabela/Tabela06.png" alt="7"><img class="frame" src="img/tabela/Tabela07.png" alt="8"></div>
+<summary>Gabarito</summary>
+<figure class="img"><img src="img/Gabaritos/Gabarito2.png" alt=""></figure>
 </details>
-<p>=======
-A tabela tão falada é de sufixos e prefixos, então com os caracteres que queremos, fazemos os sufixos e os prefixos deles e pegamos o maior tamanho entre os sufixos e prefixos iguais, sendo esse o índice e o indicativo de quanto a nossa palavra ou frase deve pular.</p>
 <details class="answer">
-<summary>Slides</summary>
+<summary>Gabarito Detalhado</summary>
+<div class="animation"><img class="frame" src="img/Gabarito_Detalhado_2/GabaritoDetalhado20.png" alt="1"><img class="frame" src="img/Gabarito_Detalhado_2/GabaritoDetalhado21.png" alt="2"><img class="frame" src="img/Gabarito_Detalhado_2/GabaritoDetalhado22.png" alt="3"><img class="frame" src="img/Gabarito_Detalhado_2/GabaritoDetalhado23.png" alt="4"><img class="frame" src="img/Gabarito_Detalhado_2/GabaritoDetalhado24.png" alt="5"><img class="frame" src="img/Gabarito_Detalhado_2/GabaritoDetalhado25.png" alt="6"><img class="frame" src="img/Gabarito_Detalhado_2/GabaritoDetalhado26.png" alt="7"><img class="frame" src="img/Gabarito_Detalhado_2/GabaritoDetalhado27.png" alt="8"><img class="frame" src="img/Gabarito_Detalhado_2/GabaritoDetalhado28.png" alt="9"></div>
+</details>
+</blockquote>
+<blockquote class="question">
+<p>Exercício 3</p>
+<p>Construa a tabela de prefixos e sufixos para:</p>
+<figure class="img"><img src="img/Exercicios/Exercicio3.png" alt=""></figure>
+<details class="answer">
+<summary>Gabarito</summary>
+<figure class="img"><img src="img/Gabaritos/Gabarito3.png" alt=""></figure>
+</details>
+<details class="answer">
+<summary>Gabarito Detalhado</summary>
+<div class="animation"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado30.png" alt="1"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado31.png" alt="2"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado32.png" alt="3"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado33.png" alt="4"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado34.png" alt="5"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado35.png" alt="6"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado36.png" alt="7"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado37.png" alt="8"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado38.png" alt="9"></div>
 </details>
 </blockquote>
 <blockquote class="warning">
 <p>Aviso</p>
-<p>IDEIAS: fazer slides para mostrar como acha a tabela</p>
+<p>Escrever mais (explicação dos exercícios, etc) e falar da complexidade</p>
 </blockquote>
 <h2>4.Implementação em C</h2>
 <p>O KMP usa uma tabela de falhas (também conhecida como tabela de borda) para armazenar informações sobre o padrão que são usadas para evitar comparações repetidas. A tabela de falhas é construída antes de iniciar a correspondência de padrões e é baseada no padrão a ser encontrado.</p>
