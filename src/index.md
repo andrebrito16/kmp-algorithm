@@ -127,12 +127,14 @@ Construa a tabela de prefixos e sufixos para:
 
 ![](Exercicios/Exercicio3.png)
 
+
 ::: Gabarito
 ![](Gabaritos/Gabarito3.png)
 :::
 ::: Gabarito Detalhado
 :Gabarito_Detalhado_3
 :::
+
 ???
 !!!
 Escrever mais (explicação dos exercícios, etc) e falar da complexidade
