@@ -2,64 +2,76 @@
 
 Algoritmo de Knuth-Morris-Pratt (KMP) 
 ======
+
 ++++++++++++++++++++++++++++++++++++++++++
-*Desafios de Programação*
+Desafios de Programação
 
 **Aula 22: Knuth-Morris-Pratt (KMP)**
-++++++++++++++++++++++++++++++++++++++++++ História KMP
--É uma das soluções mais eficientes para o problema de correspondência de padrões em uma string.
-++++++++++++++++++++++++++++++++++++++++++ História KMP
--É uma das soluções mais eficientes para o problema de correspondência de padrões em uma string.
+++++++++++++++++++++++++++++++++++++++++++ 
 
--Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt
 ++++++++++++++++++++++++++++++++++++++++++ História KMP
--É uma das soluções mais eficientes para o problema de correspondência de padrões em uma string.
+- +É uma das soluções mais eficientes para o problema de correspondência de padrões em uma string.
 
--Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt
+- +Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt
 
--Processamento de Linguagem Neural, Ánalise de Dados e Bioinformática
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
-- O algoritmo KMP compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto.
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
-- O algoritmo KMP compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto.
-- Se os demais caracteres tiverem correspondência, a comparação ocorre caractere por caractere até encontrar uma diferença.
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
-- O algoritmo KMP compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto.
-- Se os demais caracteres tiverem correspondência, a comparação ocorre caractere por caractere até encontrar uma diferença.
-- Quando uma diferença é encontrada, o algoritmo utiliza a tabela para determinar o salto necessário para o próximo caractere.
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+- +Processamento de Linguagem Neural, Ánalise de Dados e Bioinformática
+
+++++++++++++++++++++++++++++++++++++++++++ 
+
+++++++++++++++++++++++++++++++++++++++++++ =
+- +O algoritmo KMP compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto.
+- +Se os demais caracteres tiverem correspondência, a comparação ocorre caractere por caractere até encontrar uma diferença.
+- +Quando uma diferença é encontrada, o algoritmo utiliza a tabela para determinar o salto necessário para o próximo caractere.
+
+++++++++++++++++++++++++++++++++++++++++++ 
+
+++++++++++++++++++++++++++++++++++++++++++ =
 ![](Funcionamento/Funcionamento00.png)
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+++++++++++++++++++++++++++++++++++++++++++ =
 ![](Funcionamento/Funcionamento01.png)
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+++++++++++++++++++++++++++++++++++++++++++ 
+
+++++++++++++++++++++++++++++++++++++++++++ =
 ![](Funcionamento/Funcionamento02.png)
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+++++++++++++++++++++++++++++++++++++++++++ 
+
+++++++++++++++++++++++++++++++++++++++++++ =
 ![](Funcionamento/Funcionamento03.png)
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+++++++++++++++++++++++++++++++++++++++++++ 
+
+++++++++++++++++++++++++++++++++++++++++++ =
 ![](Funcionamento/Funcionamento04.png)
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+++++++++++++++++++++++++++++++++++++++++++ 
+
+++++++++++++++++++++++++++++++++++++++++++ =
 ![](Funcionamento/Funcionamento05.png)
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+++++++++++++++++++++++++++++++++++++++++++ 
+
+++++++++++++++++++++++++++++++++++++++++++ =
 ![](Funcionamento/Funcionamento06.png)
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+++++++++++++++++++++++++++++++++++++++++++ 
+
+++++++++++++++++++++++++++++++++++++++++++ =
 ![](Funcionamento/Funcionamento07.png)
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+++++++++++++++++++++++++++++++++++++++++++ 
+
+++++++++++++++++++++++++++++++++++++++++++ =
 ![](Funcionamento/Funcionamento08.png)
-++++++++++++++++++++++++++++++++++++++++++ Funcionamento do Algoritmo
+++++++++++++++++++++++++++++++++++++++++++ 
+
+++++++++++++++++++++++++++++++++++++++++++ =
 ![](Funcionamento/Funcionamento09.png)
-++++++++++++++++++++++++++++++++++++++++++ Vantagens do Algoritmo
--Eficiência: Evita comparações desnecessárias, resultando em um processo de busca mais rápido.
-++++++++++++++++++++++++++++++++++++++++++ Vantagens do Algoritmo
--Eficiência: Evita comparações desnecessárias, resultando em um processo de busca mais rápido.
+++++++++++++++++++++++++++++++++++++++++++
 
--Utilização da tabela: A tabela auxilia no cálculo dos saltos, otimizando a localização dos padrões.
 ++++++++++++++++++++++++++++++++++++++++++ Vantagens do Algoritmo
--Eficiência: Evita comparações desnecessárias, resultando em um processo de busca mais rápido.
+- +Eficiência: Evita comparações desnecessárias, resultando em um processo de busca mais rápido.
 
--Utilização da tabela: A tabela auxilia no cálculo dos saltos, otimizando a localização dos padrões.
+- +Utilização da tabela: A tabela auxilia no cálculo dos saltos, otimizando a localização dos padrões.
 
--Solução poderosa: O algoritmo KMP é amplamente reconhecido por sua capacidade de solucionar o problema de correspondência de padrões de forma rápida e eficiente.
-++++++++++++++++++++++++++++++++++++++++++ .
+- +Solução poderosa: O algoritmo KMP é amplamente reconhecido por sua capacidade de solucionar o problema de correspondência de padrões de forma rápida e eficiente.
+++++++++++++++++++++++++++++++++++++++++++
+
+
 **Handout**
 
 - Agora podem tanto fazer individualmente quanto em grupo…
