@@ -31,18 +31,11 @@
 
 </div>
 <div class="slide-main">
-<p><em>Desafios de Programação</em></p>
-</div>
-</div>
-</div>
 <p>Desafios de Programação</p>
 <p><strong>Aula 22: Knuth-Morris-Pratt (KMP)</strong></p>
-<div class="slide">
-<div class="slide-container">
-<div class="slide-header">
-
 </div>
-<div class="slide-main">
+</div>
+</div>
 <div class="slide">
 <div class="slide-container">
 <div class="slide-header">
@@ -60,9 +53,6 @@ História KMP
 <p>Processamento de Linguagem Neural, Ánalise de Dados e Bioinformática</p>
 </li>
 </ul>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -245,25 +235,44 @@ Vantagens do Algoritmo
 </div>
 </div>
 </div>
-<blockquote class="warning">
-<p>Aviso</p>
-<p>Precisa:</p>
-<ul>
-<li>Explicar muito bem, com exercícios, sobre o “pulo” do algoritmo</li>
-<li>Melhorar a parte da tabela de prefixos/sufixos e os exercícios</li>
-<li>Implementação, pode ser um exercício desafio</li>
-</ul>
-</blockquote>
 <h2>1.O Problema da Busca de Substrings</h2>
 <p>A busca de substrings é um problema comum em ciência da computação. A questão é: dado um texto e um padrão, podemos encontrar todas as ocorrências do padrão dentro do texto?</p>
 <p>A solução mais simples, mas também a mais lenta, é verificar cada substring do texto em sequência para ver se ela corresponde ao padrão, a chamada força bruta. No entanto, essa abordagem tem uma complexidade de tempo de O(nm), onde n é o comprimento do texto e m é o comprimento do padrão. Isso é muito ineficiente, especialmente para textos longos.</p>
-<p>Felizmente, existem algoritmos mais rápidos. O Algoritmo de Knuth-Morris-Pratt (KMP) é um desses algoritmos.</p>
-<h2>2.O Algoritmo KMP</h2>
-<p>O algoritmo KMP foi inventado por Donald Knuth, Vaughan Pratt e James H. Morris em 1977.</p>
-<p>O KMP se baseia em uma observação importante: quando encontramos um mismatch (desajuste) após alguns matches, então já sabemos alguns caracteres no texto do próximo segmento. Logo, não precisamos mover o segmento para a próxima imediata posição, podemos usar algumas das informações que já obtivemos para mover o segmento para a posição ideal.</p>
-<p>O algoritmo KMP utiliza uma tabela de valores pré-computados chamada de tabela LPS (Longest Proper Prefix which is also suffix - Maior prefixo apropriado que é também sufixo) para pular caracteres desnecessários.</p>
-<h2>3.Construindo a tabela LPS</h2>
-<p>A tabela do algoritmo refere-se à tabela de sufixos e prefixos. Nesse contexto, a tabela é construída a partir dos caracteres desejados, gerando os sufixos e prefixos correspondentes. Em seguida, verifica-se o maior tamanho entre os sufixos e prefixos que são iguais. Esse tamanho é usado como um índice que indica quantos caracteres a palavra ou frase deve avançar.</p>
+<p>Felizmente, existem algoritmos mais rápidos. O Algoritmo de Knuth-Morris-Pratt (KMP) é um desses algoritmos. Em vez de se mover um caractere por vez, como na busca de padrões convencional, ele permite que você <strong>“pule”</strong> partes do texto com base no conhecimento adquirido até o momento.</p>
+<h2>2.Compreendendo os Prefixos e Sufixos de Prefixos</h2>
+<p>No contexto do algoritmo KMP, prefixos são partes iniciais do padrão. Para o padrão <strong>“ABCDE”</strong>, os prefixos são <strong>“A”</strong>, <strong>“AB”</strong>, <strong>“ABC”</strong>, <strong>“ABCD”</strong>, excluindo-se a própria string original.</p>
+<blockquote class="question">
+<p>Checkpoint 1</p>
+<p><strong>a)</strong> Quais são os prefixos da palavra <strong>“INFORMATICA”</strong>?<br>
+<strong>b)</strong> Quantos prefixos existem? Descreva o processo de como você chegou a essa resposta.</p>
+<details class="answer">
+<summary>Gabarito</summary>
+<p><strong>a)</strong> Os prefixos da palavra <strong>“INFORMATICA”</strong> são <strong>“I”</strong>, <strong>“IN”</strong>, <strong>“INF”</strong>, <strong>“INFO”</strong>, <strong>“INFOR”</strong>, <strong>“INFORM”</strong>, <strong>“INFORMA”</strong>, <strong>“INFORMAT”</strong>, <strong>“INFORMATI”</strong>, <strong>“INFORMATIC”</strong>.<br>
+<strong>b)</strong> Existem 10 prefixos. Para encontrar esses prefixos, começamos do primeiro caractere e vamos adicionando um caractere de cada vez até chegar ao penúltimo.</p>
+</details>
+</blockquote>
+<p>Um sufixo de prefixo é qualquer sufixo que pode ser extraído de um prefixo do padrão. No caso do prefixo <strong>“ABC”</strong>, temos dois sufixos: <strong>“BC”</strong> e <strong>“C”</strong>.</p>
+<blockquote class="question">
+<p>Checkpoint 2</p>
+<p>Quais são os sufixos possíveis para cada prefixo da palavra <strong>“INFORMATICA”</strong> que você encontrou no checkpoint 1?</p>
+<details class="answer">
+<summary>Gabarito</summary>
+<p>Os sufixos de cada prefixo são os seguintes:<br>
+“I”: nenhum sufixo<br>
+“IN”: <strong>“N”</strong><br>
+“INF”: <strong>“NF”</strong>, <strong>“F”</strong><br>
+“INFO”: <strong>“NFO”</strong>, <strong>“FO”</strong>, <strong>“O”</strong><br>
+“INFOR”: <strong>“NFOR”</strong>, <strong>“FOR”</strong>, <strong>“OR”</strong>, <strong>“R”</strong><br>
+E assim por diante.</p>
+</details>
+</blockquote>
+<p><strong>Mas por que precisamos saber sobre prefixos e sufixos?</strong></p>
+<p>Vamos dizer que estamos procurando o padrão <strong>“ABCABC”</strong> dentro de um texto e encontramos um match parcial - <strong>“ABCAB”</strong>, mas o próximo caractere no texto é <strong>“D”</strong>, não <strong>“C”</strong>. Isso significa que temos um desajuste. Em um algoritmo de busca normal, começaríamos a busca novamente a partir do próximo caractere.</p>
+<p>No entanto, o algoritmo KMP faz algo mais inteligente. Ele observa o match parcial (“ABCAB”) e verifica se há algum sufixo deste match parcial que corresponda a um prefixo do padrão original. Neste caso, <strong>“AB”</strong> no final de <strong>“ABCAB”</strong> é um sufixo do match parcial e também um prefixo do padrão original <strong>“ABCABC”</strong>. Isso significa que podemos <strong>“saltar”</strong> para o próximo local no texto que alinha este sufixo <strong>“AB”</strong> com o prefixo <strong>“AB”</strong> do padrão original na próxima etapa da busca, pois já sabemos que a parte <strong>“AB”</strong> é uma correspondência válida.</p>
+<p>Assim, em vez de mover um caractere de cada vez, <strong>o algoritmo KMP pode mover vários caracteres de uma vez</strong>, tornando a busca muito mais eficiente. Essa é a ideia central do algoritmo KMP.</p>
+<figure class="img"><img src="img/pikachu.jpg" alt=""></figure>
+<h2>3.A tabela LPS</h2>
+<p>A tabela LPS é uma representação pré-computada (cache) que armazena informações sobre cada prefixo do padrão e o tamanho do maior sufixo desse prefixo que também é um prefixo. Esse tamanho é usado como um índice que indica quantos caracteres a palavra ou frase deve avançar.</p>
 <div class="animation"><img class="frame" src="img/tabela_prefixo/prefixo0.png" alt="1"><img class="frame" src="img/tabela_prefixo/prefixo1.png" alt="2"><img class="frame" src="img/tabela_prefixo/prefixo2.png" alt="3"><img class="frame" src="img/tabela_prefixo/prefixo3.png" alt="4"><img class="frame" src="img/tabela_prefixo/prefixo4.png" alt="5"><img class="frame" src="img/tabela_prefixo/prefixo5.png" alt="6"><img class="frame" src="img/tabela_prefixo/prefixo6.png" alt="7"><img class="frame" src="img/tabela_prefixo/prefixo7.png" alt="8"><img class="frame" src="img/tabela_prefixo/prefixo8.png" alt="9"></div>
 <p>Agora que aprendemos, vamos fazer alguns exercícios para fixar o conteúdo.</p>
 <blockquote class="question">
