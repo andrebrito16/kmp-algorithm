@@ -194,7 +194,15 @@ Construa a tabela de prefixos e sufixos para:
 !!!
 Escrever mais (explicação dos exercícios, etc) e falar da complexidade
 !!!
-4.Implementação em C
+
+4.Pulo com a tabela
+--------
+
+Agora que entendemos como acontece o pulo com a tabela de prefixos/sufixos
+
+:Funcionamento
+
+5.Implementação em C
 -------
 
 O KMP usa uma tabela de falhas (também conhecida como tabela de borda) para armazenar informações sobre o padrão que são usadas para evitar comparações repetidas. A tabela de falhas é construída antes de iniciar a correspondência de padrões e é baseada no padrão a ser encontrado.
