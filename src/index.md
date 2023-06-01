@@ -14,15 +14,14 @@ Desafios de Programação
 
 - +^Desenvolvido em 1977 pelos pesquisadores Donald Knuth, James Morris e Vaughan Pratt
 
-- +^Processamento de Linguagem Neural, Ánalise de Dados e Bioinformática
+- +^Utilizado em áreas como Processamento de Linguagem Neural, Ánalise de Dados e Bioinformática
 
 ++++++++++++++++++++++++++++++++++++++++++
 
-++++++++++++++++++++++++++++++++++++++++++ =
-
-- +^O algoritmo KMP compara o primeiro caractere do padrão (frase ou palavra) com o primeiro caractere do texto.
-- +^Se os demais caracteres tiverem correspondência, a comparação ocorre caractere por caractere até encontrar uma diferença.
-- +^Quando uma diferença é encontrada, o algoritmo utiliza uma tabela para determinar o salto necessário para o próximo caractere.
+++++++++++++++++++++++++++++++++++++++++++ Essência do KMP
+- +^O algoritmo KMP inicia comparando caractere por caractere do padrão com o texto.
+- +^Se ocorre um mismatch, o KMP usa a lógica de sufixos de prefixos para otimizar a busca, não necessariamente recomeçando as comparações do zero.
+- +^Uma tabela de falha, utilizada para determinar saltos, é construída como consequência da lógica de sufixos de prefixos, facilitando a busca de padrões.
 
 ++++++++++++++++++++++++++++++++++++++++++
 
@@ -153,43 +152,48 @@ Desafios de Programação
 
 A busca de substrings é um problema comum em ciência da computação. A questão é: dado um texto e um padrão, podemos encontrar todas as ocorrências do padrão dentro do texto?
 
-A solução mais simples, mas também a mais lenta, é verificar cada substring do texto em sequência para ver se ela corresponde ao padrão, a chamada força bruta. No entanto, essa abordagem tem uma complexidade de tempo de O(nm), onde n é o comprimento do texto e m é o comprimento do padrão. Isso é muito ineficiente, especialmente para textos longos.
+A solução mais simples, mas também a mais lenta, é verificar cada substring do texto em sequência para ver se ela corresponde ao padrão, a chamada força bruta. No entanto, essa abordagem é muito ineficiente, especialmente para textos longos, já que o número de comparações feitas será muito grande.
 
+Então como podemos melhorar a eficiência em comparações de strings?  
+  
 Felizmente, existem algoritmos mais rápidos. O Algoritmo de Knuth-Morris-Pratt (KMP) é um desses algoritmos. Em vez de se mover um caractere por vez, como na busca de padrões convencional, ele permite que você **"pule"** partes do texto com base no conhecimento adquirido até o momento.
 
 ## 2.Compreendendo os Prefixos e Sufixos de Prefixos
 
 No contexto do algoritmo KMP, prefixos são partes iniciais do padrão. Para o padrão **"ABCDE"**, os prefixos são **"A"**, **"AB"**, **"ABC"**, **"ABCD"**, excluindo-se a própria string original.
-
+  
 ??? Checkpoint 1
 
-**a)** Quais são os prefixos da palavra **"INFORMATICA"**?  
+**a)** Quais são os prefixos da palavra **"DESPROG"**?  
+
 **b)** Quantos prefixos existem? Descreva o processo de como você chegou a essa resposta.
 
 ::: Gabarito
-**a)** Os prefixos da palavra **"INFORMATICA"** são **"I"**, **"IN"**, **"INF"**, **"INFO"**, **"INFOR"**, **"INFORM"**, **"INFORMA"**, **"INFORMAT"**, **"INFORMATI"**, **"INFORMATIC"**.  
-**b)** Existem 10 prefixos. Para encontrar esses prefixos, começamos do primeiro caractere e vamos adicionando um caractere de cada vez até chegar ao penúltimo.  
+**a)** Os prefixos da palavra **"DESPROG"** são **"D"**, **"DE"**, **"DES"**, **"DESP"**, **"DESPR"**, **"DESPRO"**.   
+
+**b)** Existem 6 prefixos. Para encontrar esses prefixos, começamos do primeiro caractere e vamos adicionando um caractere de cada vez até chegar ao penúltimo.
 :::
 ???
 
 Um sufixo de prefixo é qualquer sufixo que pode ser extraído de um prefixo do padrão. No caso do prefixo **"ABC"**, temos dois sufixos: **"BC"** e **"C"**.
 
-??? Checkpoint 2  
-Quais são os sufixos possíveis para cada prefixo da palavra **"INFORMATICA"** que você encontrou no checkpoint 1?
+??? Checkpoint 2
+Quais são os sufixos possíveis para cada prefixo da palavra **"DESPROG"** que você encontrou no checkpoint 1?
+
 ::: Gabarito
 Os sufixos de cada prefixo são os seguintes:  
-"I": nenhum sufixo  
-"IN": **"N"**  
-"INF": **"NF"**, **"F"**  
-"INFO": **"NFO"**, **"FO"**, **"O"**  
-"INFOR": **"NFOR"**, **"FOR"**, **"OR"**, **"R"**  
-E assim por diante.  
+**"D"**: nenhum sufixo  
+**"DE"**: **"E"**  
+**"DES"**: **"ES"**, **"S"**  
+**"DESP"**: **"ESP"**, **"SP"**, **"P"**  
+**"DESPR"**: **"ESPR"**, **"SPR"**, **"PR"**, **"R"**  
+**"DESPRO"**: **"ESPRO"**, **"SPRO"**, **"PRO"**, **"RO"**, **"O"**  
 :::
 ???
 
-**Mas por que precisamos saber sobre prefixos e sufixos?**
-
-Vamos dizer que estamos procurando o padrão **"ABCABC"** dentro de um texto e encontramos um match parcial - **"ABCAB"**, mas o próximo caractere no texto é **"D"**, não **"C"**. Isso significa que temos um desajuste. Em um algoritmo de busca normal, começaríamos a busca novamente a partir do próximo caractere.
+**Mas por que precisamos saber sobre prefixos e sufixos?**  
+  
+Vamos dizer que estamos procurando o padrão **"ABCABC"** dentro de um texto e encontramos um match parcial - **"ABCAB"**, mas o próximo caractere no texto é **"D"**, não **"C"**. Isso significa que temos um mismatch. Em um algoritmo de busca normal, começaríamos a busca novamente a partir do próximo caractere.
 
 No entanto, o algoritmo KMP faz algo mais inteligente. Ele observa o match parcial ("ABCAB") e verifica se há algum sufixo deste match parcial que corresponda a um prefixo do padrão original. Neste caso, **"AB"** no final de **"ABCAB"** é um sufixo do match parcial e também um prefixo do padrão original **"ABCABC"**. Isso significa que podemos **"saltar"** para o próximo local no texto que alinha este sufixo **"AB"** com o prefixo **"AB"** do padrão original na próxima etapa da busca, pois já sabemos que a parte **"AB"** é uma correspondência válida.
 
