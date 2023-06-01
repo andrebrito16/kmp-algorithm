@@ -139,6 +139,9 @@ Construa a tabela de prefixos e sufixos para:
 !!!
 Escrever mais (explicação dos exercícios, etc) e falar da complexidade
 !!!
+
+x.Pulo com a table
+
 4.Implementação em C
 -------
 
