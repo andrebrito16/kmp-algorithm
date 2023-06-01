@@ -365,7 +365,8 @@ Vantagens do Algoritmo
 </div>
 </div>
 </div>
-<h2>1.O Problema da Busca de Substrings</h2>
+<p>1.O Problema da Busca de Substrings</p>
+<hr>
 <p>A busca de substrings é um problema comum em ciência da computação. A questão é: dado um texto e um padrão, podemos encontrar todas as ocorrências do padrão dentro do texto?</p>
 <p>A solução mais simples, mas também a mais lenta, é verificar cada substring do texto em sequência para ver se ela corresponde ao padrão, a chamada força bruta. No entanto, essa abordagem é muito ineficiente, especialmente para textos longos, já que o número de comparações feitas será muito grande.</p>
 <p>Então como podemos melhorar a eficiência em comparações de strings?</p>
@@ -453,73 +454,147 @@ Vantagens do Algoritmo
 <p>Agora que entendemos como acontece o pulo com a tabela de prefixos/sufixos</p>
 <div class="animation"><img class="frame" src="img/Funcionamento/Funcionamento00.png" alt="1"><img class="frame" src="img/Funcionamento/Funcionamento01.png" alt="2"><img class="frame" src="img/Funcionamento/Funcionamento02.png" alt="3"><img class="frame" src="img/Funcionamento/Funcionamento03.png" alt="4"><img class="frame" src="img/Funcionamento/Funcionamento04.png" alt="5"><img class="frame" src="img/Funcionamento/Funcionamento05.png" alt="6"><img class="frame" src="img/Funcionamento/Funcionamento06.png" alt="7"><img class="frame" src="img/Funcionamento/Funcionamento07.png" alt="8"><img class="frame" src="img/Funcionamento/Funcionamento08.png" alt="9"><img class="frame" src="img/Funcionamento/Funcionamento09.png" alt="10"><img class="frame" src="img/Funcionamento/Funcionamento10.png" alt="11"><img class="frame" src="img/Funcionamento/Funcionamento11.png" alt="12"><img class="frame" src="img/Funcionamento/Funcionamento12.png" alt="13"><img class="frame" src="img/Funcionamento/Funcionamento13.png" alt="14"><img class="frame" src="img/Funcionamento/Funcionamento14.png" alt="15"><img class="frame" src="img/Funcionamento/Funcionamento15.png" alt="16"><img class="frame" src="img/Funcionamento/Funcionamento16.png" alt="17"><img class="frame" src="img/Funcionamento/Funcionamento17.png" alt="18"><img class="frame" src="img/Funcionamento/Funcionamento18.png" alt="19"><img class="frame" src="img/Funcionamento/Funcionamento19.png" alt="20"><img class="frame" src="img/Funcionamento/Funcionamento20.png" alt="21"><img class="frame" src="img/Funcionamento/Funcionamento21.png" alt="22"><img class="frame" src="img/Funcionamento/Funcionamento22.png" alt="23"></div>
 <h2>5.Implementação em C</h2>
-<p>O KMP usa uma tabela de falhas (também conhecida como tabela de borda) para armazenar informações sobre o padrão que são usadas para evitar comparações repetidas. A tabela de falhas é construída antes de iniciar a correspondência de padrões e é baseada no padrão a ser encontrado.</p>
+<p>Como explicado nesse handout, o KMP utiliza a <strong>tabela LPS</strong> como um cache. Ou seja, antes de aplicar o algoritmo de fato, devemos gerar essa tabela.</p>
+<h2>Implementação da função que monta a tabela</h2>
+<p>Nesse passo iremos implementar uma função que irá receber o padrão a ser encontrado, o tamanho do padrão e o vetor que será a tabela LPS.</p>
+<p>A ideia para montar essa tabela já foi explicada por passos no handout, porém para facilitar a implementação em C, primeiro vamos mostrar
+um pseudocódigo.</p>
+<h2>Pseudocódigo</h2>
+<p>Lembrando que a assinatura da função é algo parecido com <code class="terminal nohighlight"> gerar_tabela_LPS(char *padrão, int n, int *lps)</code>.</p>
+<p>Muito bem, agora vamos ao pseudocódigo de fato.</p>
+<pre><code class="language-s">Definir o comprimento como zero
+Definir o primeiro elemento do array de prefixo como zero
+
+Definir "i" como 1
+
+Enquanto "i" for menor que o tamanho do padrão:
+    Se o i-ésimo caractere do padrão é igual ao caractere no índice de "comprimento" do padrão:
+        Incrementar o comprimento
+        Definir o i-ésimo elemento do array de prefixo como o comprimento
+        Incrementar "i"
+    Senão:
+        Se o comprimento não é zero:
+            Definir o comprimento como o valor no índice "comprimento - 1" do array de prefixo
+        Senão:
+            Definir o i-ésimo elemento do array de prefixo como zero
+            Incrementar "i"
+</code></pre>
 <blockquote class="warning">
 <p>Aviso</p>
-<p>A ser melhorado</p>
+<p>Procure entender bem o pseudocódigo dessa função.</p>
 </blockquote>
 <blockquote class="question">
 <p>Pergunta</p>
-<p>Como seria uma implementação do algoritmo KMP em C?</p>
+<p>Agora que você já entendeu bem, como ficaria a implementação da função que calcula a tabela
+LPS em C?</p>
 <details class="answer">
 <summary>Resposta</summary>
-<p>Aqui está um exemplo de implementação do algoritmo KMP em C:</p>
+<blockquote class="warning">
+<p>Aviso</p>
+<p>Lembre-se que essa função não retorna nada, só escreve no array que teve seu endereço passado como argumento da função.</p>
+</blockquote>
+<pre><code class="language-c">void gera_tabela_lps(char *padrão, int n, int *lps) {
+    int tamanho = 0;
+    lps[0] = 0;
+
+    int i = 1;
+    while (i &lt; n) {
+        if (padrão[i] == padrão[tamanho]) {
+            tamanho++;
+            lps[i] = tamanho;
+            i++;
+        } else {
+            if (tamanho != 0) {
+                tamanho = lps[tamanho - 1];
+            } else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+    }
+}
+
+</code></pre>
+</details>
+</blockquote>
+<h2>Implementação do KMP</h2>
+<p>Bem, agora que já temos a função que calcula a tabela LPS podemos, finalmente, aplicar o algoritmo KMP. mas antes, como de costume,
+vamos ao pseudocódigo.</p>
+<h2>Pseudocódigo</h2>
+<p>A função do KMP deverá receber como argumento apenas o texto e o padrão que queremos buscar nesse texto.</p>
+<p>Dado isso, o pseudocódigo fica assim:</p>
+<pre><code class="language-s">Função para buscar o padrão no texto (texto, padrão):
+    Definir M como o tamanho do padrão
+    Definir N como o tamanho do texto
+
+    Criar um array lps de tamanho M
+    Chamar a função para calcular o array de prefixo (padrão, M, lps)
+
+    Definir "i" e "j" como zero
+
+    Enquanto "i" for menor que N:
+        Se o j-ésimo caractere do padrão é igual ao i-ésimo caractere do texto:
+            Incrementar "j"
+            Incrementar "i"
+            
+        Se "j" for igual a M:
+            índice é igual a (i - j). E o padrão foi encontrado nesse índice.
+            Se "j" não é zero:
+                Definir "j" como o valor no índice "j - 1" do array lps
+
+        Senão, se "i" for menor que N e o j-ésimo caractere do padrão não é igual ao i-ésimo caractere do texto:
+            Se "j" não é zero:
+                Definir "j" como o valor no índice "j - 1" do array lps
+            Senão:
+                Incrementar "i"
+</code></pre>
+<blockquote class="question">
+<p>Pergunta</p>
+<p>Agora que você já viu <s>e entendeu</s> o pseudocódigo, como fica a implementação do KMP em C?</p>
+<details class="answer">
+<summary>Resposta</summary>
+<pre><code class="language-c">void KMP(char *texto, char *padrao) {
+    int M = strlen(padrao);
+    int N = strlen(text);
+
+    int lps[M];
+
+    gera_tabela_lps(padrao, M, lps);
+
+    int i = 0;
+    int j = 0;
+    while (i &lt; N) {
+        if (padrao[j] == text[i]) {
+            j++;
+            i++;
+        }
+
+        if (j == M) {
+            printf("Padrão encontrado no índice: %d\n", i - j);
+            j = lps[j - 1];
+        } else if (i &lt; N &amp;&amp; padrao[j] != text[i]) {
+            if (j != 0) {
+                j = lps[j - 1];
+            } else {
+                i = i + 1;
+            }
+        }
+    }
+}
+
+
+</code></pre>
+<p>Você deve ter percebido que nesse código há o uso da função <code class="language-s">strlen</code> que vem da biblioteca, <code class="language-s">string</code>, por isso não esqueça de incluir
+no seu código.</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
-
-void preencher_tabela(int tabela[], char padrao[])
-{
-    int tam_padrao = strlen(padrao);
-    int i = 0, j = -1;
-    tabela[0] = -1;
-
-    while (i &lt; tam_padrao)
-    {
-        while (j &gt;= 0 &amp;&amp; padrao[i] != padrao[j])
-        {
-            j = tabela[j];
-        }
-
-        i++;
-        j++;
-        tabela[i] = j;
-    }
-}
-
-void encontrar_padrao(char texto[], char padrao[])
-{
-    int tam_texto = strlen(texto);
-    int tam_padrao = strlen(padrao);
-    int tabela[tam_padrao];
-    preencher_tabela(tabela, padrao);
-    int i = 0, j = 0;
-
-    while (i &lt; tam_texto)
-    {
-        while (j &gt;= 0 &amp;&amp; texto[i] != padrao[j])
-        {
-            j = tabela[j];
-        }
-
-        i++;
-        j++;
-
-        if (j == tam_padrao)
-        {
-            printf("Padrao encontrado na posicao %d\n", i - j);
-            j = tabela[j];
-        }
-    }
-}
-
-int main()
-{
-    char texto[] = "ababcabcabababcabcabc";
-    char padrao[] = "abcabc";
-    encontrar_padrao(texto, padrao);
-    return 0;
-}
 </code></pre>
+<p>Lembrando que essa função foi usada apenas para facilitar as coisas, você já fez muitos “whiles” em C durante o semestre, se podemos poupar de dois
+por que não fazer, não é?</p>
+<blockquote class="warning">
+<p>Aviso</p>
+<p>Essa função não retorna nada, porém ela poderia ser facilmente modificada para retornar um inteiro com o índice de onde a ocorrência foi encontrada.</p>
+</blockquote>
 </details>
 </blockquote>
 
