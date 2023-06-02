@@ -365,8 +365,7 @@ Vantagens do Algoritmo
 </div>
 </div>
 </div>
-<p>1.O Problema da Busca de Substrings</p>
-<hr>
+<h2>1.O Problema da Busca de Substrings</h2>
 <p>A busca de substrings é um problema comum em ciência da computação. A questão é: dado um texto e um padrão, podemos encontrar todas as ocorrências do padrão dentro do texto?</p>
 <p>A solução mais simples, mas também a mais lenta, é verificar cada substring do texto em sequência para ver se ela corresponde ao padrão, a chamada força bruta. No entanto, essa abordagem é muito ineficiente, especialmente para textos longos, já que o número de comparações feitas será muito grande.</p>
 <p>Então como podemos melhorar a eficiência em comparações de strings?</p>
@@ -403,7 +402,31 @@ Vantagens do Algoritmo
 <p>No entanto, o algoritmo KMP faz algo mais inteligente. Ele observa o match parcial (“ABCAB”) e verifica se há algum sufixo deste match parcial que corresponda a um prefixo do padrão original. Neste caso, <strong>“AB”</strong> no final de <strong>“ABCAB”</strong> é um sufixo do match parcial e também um prefixo do padrão original <strong>“ABCABC”</strong>. Isso significa que podemos <strong>“saltar”</strong> para o próximo local no texto que alinha este sufixo <strong>“AB”</strong> com o prefixo <strong>“AB”</strong> do padrão original na próxima etapa da busca, pois já sabemos que a parte <strong>“AB”</strong> é uma correspondência válida.</p>
 <p>Assim, em vez de mover um caractere de cada vez, <strong>o algoritmo KMP pode mover vários caracteres de uma vez</strong>, tornando a busca muito mais eficiente. Essa é a ideia central do algoritmo KMP.</p>
 <figure class="img"><img src="img/pikachu.jpg" alt=""></figure>
-<h2>3.A tabela LPS</h2>
+<h2>3.Funcionamento do KMP</h2>
+<p>Vamos dar um passo a passo de como o algoritmo KMP executa um “salto” durante a busca de um padrão em um texto. Para isso, vamos considerar o padrão “ACACATG” e supor que estamos procurando por ele em um texto.</p>
+<div class="animation"><img class="frame" src="img/Pulo_sem_tabela/pulo00.png" alt="1"><img class="frame" src="img/Pulo_sem_tabela/pulo01.png" alt="2"><img class="frame" src="img/Pulo_sem_tabela/pulo02.png" alt="3"><img class="frame" src="img/Pulo_sem_tabela/pulo03.png" alt="4"><img class="frame" src="img/Pulo_sem_tabela/pulo04.png" alt="5"><img class="frame" src="img/Pulo_sem_tabela/pulo05.png" alt="6"></div>
+<ul>
+<li>
+<p>Passo 1: Iniciamos a busca do padrão (“ACACATG”) no texto, começando do primeiro caractere de ambos.</p>
+</li>
+<li>
+<p>Passo 2: Comparamos os caracteres um a um. Suponha que encontramos um match parcial “ACACA”, mas o próximo caractere do texto não é o esperado, então temos um desajuste.</p>
+</li>
+<li>
+<p>Passo 3: Agora, em vez de começar a busca do zero, olhamos para o match parcial “ACACA”. Procuramos o maior sufixo deste match que também é um prefixo do padrão. Neste caso, é “ACA”. Este sufixo tem um comprimento de 2.</p>
+</li>
+<li>
+<p>Passo 4: O tamanho do padrão é 5. Então, subtraímos o tamanho do sufixo do prefixo (3) do tamanho do padrão (5), o que nos dá um “salto” de 2 posições.</p>
+</li>
+<li>
+<p>Passo 5: Movemos a busca para a frente no texto de maneira que este sufixo “ACA” do texto se alinhe com o prefixo “ACA” do padrão. Isso significa que pulamos a busca para duas posições à frente.</p>
+</li>
+<li>
+<p>Passo 6: Continuamos a busca a partir desta posição, ou seja, continuamos a partir do caractere seguinte ao “ACA” no texto e no padrão.</p>
+</li>
+</ul>
+<p>Este processo de “salto” otimiza a busca, pois evita começar do início toda vez que encontramos um desajuste. Em vez disso, usamos a informação que já temos (o match parcial) para pular para uma posição que ainda tem chance de resultar em um match completo. Isso torna a busca muito mais eficiente.</p>
+<h2>4.A tabela LPS</h2>
 <p>A tabela LPS é uma representação pré-computada (cache) que armazena informações sobre cada prefixo do padrão e o tamanho do maior sufixo desse prefixo que também é um prefixo. Esse tamanho é usado como um índice que indica quantos caracteres a palavra ou frase deve avançar.</p>
 <div class="animation"><img class="frame" src="img/tabela_prefixo/prefixo0.png" alt="1"><img class="frame" src="img/tabela_prefixo/prefixo1.png" alt="2"><img class="frame" src="img/tabela_prefixo/prefixo2.png" alt="3"><img class="frame" src="img/tabela_prefixo/prefixo3.png" alt="4"><img class="frame" src="img/tabela_prefixo/prefixo4.png" alt="5"><img class="frame" src="img/tabela_prefixo/prefixo5.png" alt="6"><img class="frame" src="img/tabela_prefixo/prefixo6.png" alt="7"><img class="frame" src="img/tabela_prefixo/prefixo7.png" alt="8"><img class="frame" src="img/tabela_prefixo/prefixo8.png" alt="9"></div>
 <p>Agora que aprendemos, vamos fazer alguns exercícios para fixar o conteúdo.</p>
@@ -446,14 +469,10 @@ Vantagens do Algoritmo
 <div class="animation"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado30.png" alt="1"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado31.png" alt="2"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado32.png" alt="3"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado33.png" alt="4"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado34.png" alt="5"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado35.png" alt="6"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado36.png" alt="7"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado37.png" alt="8"><img class="frame" src="img/Gabarito_Detalhado_3/GabaritoDetalhado38.png" alt="9"></div>
 </details>
 </blockquote>
-<blockquote class="warning">
-<p>Aviso</p>
-<p>Escrever mais (explicação dos exercícios, etc) e falar da complexidade</p>
-</blockquote>
-<h2>4.Pulo com a tabela</h2>
-<p>Agora que entendemos como acontece o pulo com a tabela de prefixos/sufixos</p>
+<h2>5.Pulo com a tabela</h2>
+<p>Com a compreensão adequada da mecânica do algoritmo e a construção da tabela LPS, é possível apreender integralmente o funcionamento do algoritmo Knuth-Morris-Pratt.</p>
 <div class="animation"><img class="frame" src="img/Funcionamento/Funcionamento00.png" alt="1"><img class="frame" src="img/Funcionamento/Funcionamento01.png" alt="2"><img class="frame" src="img/Funcionamento/Funcionamento02.png" alt="3"><img class="frame" src="img/Funcionamento/Funcionamento03.png" alt="4"><img class="frame" src="img/Funcionamento/Funcionamento04.png" alt="5"><img class="frame" src="img/Funcionamento/Funcionamento05.png" alt="6"><img class="frame" src="img/Funcionamento/Funcionamento06.png" alt="7"><img class="frame" src="img/Funcionamento/Funcionamento07.png" alt="8"><img class="frame" src="img/Funcionamento/Funcionamento08.png" alt="9"><img class="frame" src="img/Funcionamento/Funcionamento09.png" alt="10"><img class="frame" src="img/Funcionamento/Funcionamento10.png" alt="11"><img class="frame" src="img/Funcionamento/Funcionamento11.png" alt="12"><img class="frame" src="img/Funcionamento/Funcionamento12.png" alt="13"><img class="frame" src="img/Funcionamento/Funcionamento13.png" alt="14"><img class="frame" src="img/Funcionamento/Funcionamento14.png" alt="15"><img class="frame" src="img/Funcionamento/Funcionamento15.png" alt="16"><img class="frame" src="img/Funcionamento/Funcionamento16.png" alt="17"><img class="frame" src="img/Funcionamento/Funcionamento17.png" alt="18"><img class="frame" src="img/Funcionamento/Funcionamento18.png" alt="19"><img class="frame" src="img/Funcionamento/Funcionamento19.png" alt="20"><img class="frame" src="img/Funcionamento/Funcionamento20.png" alt="21"><img class="frame" src="img/Funcionamento/Funcionamento21.png" alt="22"><img class="frame" src="img/Funcionamento/Funcionamento22.png" alt="23"></div>
-<h2>5.Implementação em C</h2>
+<h2>6.Implementação em C</h2>
 <p>Como explicado nesse handout, o KMP utiliza a <strong>tabela LPS</strong> como um cache. Ou seja, antes de aplicar o algoritmo de fato, devemos gerar essa tabela.</p>
 <h2>Implementação da função que monta a tabela</h2>
 <p>Nesse passo iremos implementar uma função que irá receber o padrão a ser encontrado, o tamanho do padrão e o vetor que será a tabela LPS.</p>
