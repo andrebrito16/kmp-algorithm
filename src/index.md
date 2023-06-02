@@ -146,9 +146,8 @@ Desafios de Programação
 - ^Ou seja, “deixar para entender depois” não faz sentido. “Depois” depende de “entender”.
   ++++++++++++++++++++++++++++++++++++++++++
 
-  1.O Problema da Busca de Substrings
+## 1.O Problema da Busca de Substrings
 
----
 
 A busca de substrings é um problema comum em ciência da computação. A questão é: dado um texto e um padrão, podemos encontrar todas as ocorrências do padrão dentro do texto?
 
@@ -201,7 +200,28 @@ Assim, em vez de mover um caractere de cada vez, **o algoritmo KMP pode mover v�
 
 ![](pikachu.jpg)
 
-## 3.A tabela LPS
+## 3.Funcionamento do KMP
+
+Vamos dar um passo a passo de como o algoritmo KMP executa um “salto” durante a busca de um padrão em um texto. Para isso, vamos considerar o padrão “ACACATG” e supor que estamos procurando por ele em um texto.
+
+:Pulo_sem_tabela
+
+- Passo 1: Iniciamos a busca do padrão ("ACACATG") no texto, começando do primeiro caractere de ambos.
+
+- Passo 2: Comparamos os caracteres um a um. Suponha que encontramos um match parcial “ACACA”, mas o próximo caractere do texto não é o esperado, então temos um desajuste.
+
+- Passo 3: Agora, em vez de começar a busca do zero, olhamos para o match parcial “ACACA”. Procuramos o maior sufixo deste match que também é um prefixo do padrão. Neste caso, é “ACA”. Este sufixo tem um comprimento de 2.
+
+- Passo 4: O tamanho do padrão é 5. Então, subtraímos o tamanho do sufixo do prefixo (3) do tamanho do padrão (5), o que nos dá um “salto” de 2 posições.
+
+- Passo 5: Movemos a busca para a frente no texto de maneira que este sufixo “ACA” do texto se alinhe com o prefixo “ACA” do padrão. Isso significa que pulamos a busca para duas posições à frente.
+
+- Passo 6: Continuamos a busca a partir desta posição, ou seja, continuamos a partir do caractere seguinte ao “ACA” no texto e no padrão.
+
+Este processo de “salto” otimiza a busca, pois evita começar do início toda vez que encontramos um desajuste. Em vez disso, usamos a informação que já temos (o match parcial) para pular para uma posição que ainda tem chance de resultar em um match completo. Isso torna a busca muito mais eficiente.
+
+
+## 4.A tabela LPS
 
 A tabela LPS é uma representação pré-computada (cache) que armazena informações sobre cada prefixo do padrão e o tamanho do maior sufixo desse prefixo que também é um prefixo. Esse tamanho é usado como um índice que indica quantos caracteres a palavra ou frase deve avançar.
 
@@ -248,17 +268,14 @@ Construa a tabela de prefixos e sufixos para:
 :::
 
 ???
-!!!
-Escrever mais (explicação dos exercícios, etc) e falar da complexidade
-!!!
 
-## 4.Pulo com a tabela
+## 5.Pulo com a tabela
 
-Agora que entendemos como acontece o pulo com a tabela de prefixos/sufixos
+Com a compreensão adequada da mecânica do algoritmo e a construção da tabela LPS, é possível apreender integralmente o funcionamento do algoritmo Knuth-Morris-Pratt.
 
 :Funcionamento
 
-## 5.Implementação em C
+## 6.Implementação em C
 
 Como explicado nesse handout, o KMP utiliza a **tabela LPS** como um cache. Ou seja, antes de aplicar o algoritmo de fato, devemos gerar essa tabela.
 
