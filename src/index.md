@@ -202,21 +202,21 @@ Assim, em vez de mover um caractere de cada vez, **o algoritmo KMP pode mover v�
 
 ## 3.Funcionamento do KMP
 
-Vamos dar um passo a passo de como o algoritmo KMP executa um “salto” durante a busca de um padrão em um texto. Para isso, vamos considerar o padrão “ACACATG” e supor que estamos procurando por ele em um texto.
+Vamos dar um passo a passo de como o algoritmo KMP executa um “salto” durante a busca de um padrão em um texto. Para isso, vamos considerar o padrão “ACAC" e supor que estamos procurando por ele em um texto.
 
 :Pulo_sem_tabela
 
-- Passo 1: Iniciamos a busca do padrão ("ACACATG") no texto, começando do primeiro caractere de ambos.
+- Passo 1: Iniciamos a busca do padrão ("ACAC") no texto, começando do primeiro caractere de ambos.
 
-- Passo 2: Comparamos os caracteres um a um. Suponha que encontramos um match parcial “ACACA”, mas o próximo caractere do texto não é o esperado, então temos um desajuste.
+- Passo 2: Comparamos os caracteres um a um. Suponha que encontramos um match parcial “ACA”, mas o próximo caractere do texto não é o esperado, então temos um desajuste.
 
-- Passo 3: Agora, em vez de começar a busca do zero, olhamos para o match parcial “ACACA”. Procuramos o maior sufixo deste match que também é um prefixo do padrão. Neste caso, é “ACA”. Este sufixo tem um comprimento de 2.
+- Passo 3: Agora, em vez de começar a busca do zero, olhamos para o match parcial “ACA”. Procuramos o maior sufixo deste match que também é um prefixo do padrão. Neste caso, é “A”. Este sufixo tem um comprimento de 1.
 
-- Passo 4: O tamanho do padrão é 5. Então, subtraímos o tamanho do sufixo do prefixo (3) do tamanho do padrão (5), o que nos dá um “salto” de 2 posições.
+- Passo 4: O tamanho do padrão é 3. Então, subtraímos o tamanho do sufixo do prefixo (1) do tamanho do padrão (3), o que nos dá um “salto” de 2 posições.
 
-- Passo 5: Movemos a busca para a frente no texto de maneira que este sufixo “ACA” do texto se alinhe com o prefixo “ACA” do padrão. Isso significa que pulamos a busca para duas posições à frente.
+- Passo 5: Movemos a busca para a frente no texto de maneira que este sufixo “A” do texto se alinhe com o prefixo “ACA” do padrão. Isso significa que pulamos a busca para duas posições à frente.
 
-- Passo 6: Continuamos a busca a partir desta posição, ou seja, continuamos a partir do caractere seguinte ao “ACA” no texto e no padrão.
+- Passo 6: Continuamos a busca a partir desta posição, ou seja, continuamos a partir do caractere seguinte ao “A” no texto e no padrão.
 
 Este processo de “salto” otimiza a busca, pois evita começar do início toda vez que encontramos um desajuste. Em vez disso, usamos a informação que já temos (o match parcial) para pular para uma posição que ainda tem chance de resultar em um match completo. Isso torna a busca muito mais eficiente.
 
